@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>cuyUniversity - sesi6</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sesi 6 cuyUniversity</h1>
+        <p id="info" class="info"></p>
+        <nav>
+            <a onclick="relog()" id="home">Home</a>
+            <a onclick="darkMode()" id="mode"></a>
+            <a onclick="beraniMode()" id="modeBerani">Mode Berani</a>
+        </nav>
+    </div>
+
+    <script>
+        let body = document.body;
+        let info = document.getElementById('info');
+        let mode = document.getElementById('mode');
+        let modeBerani = document.getElementById('modeBerani');
+        let home = document.getElementById('home');
+
+        const darkLimit = 5;
+        let darkCounter = 0;
+        let darkRemainingLeft;
+        mode.textContent = 'Mode Dark'
+
+        const beraniLimit = 10;
+        let beraniCounter = 0;
+        let beraniRemainingLeft;
+
+        function darkMode() {
+            if (darkRemainingLeft == 1) {
+                info.textContent = 'Jatah dark mode anda sudah habis'
+                mode.style.display = "none";
+                home.textContent = 'Refresh'
+                return;
+            }
+
+            darkCounter += 1;
+            darkRemainingLeft = darkLimit - darkCounter;
+
+            // if (darkCounter == 1 || darkCounter == 3) {
+            //     mode.textContent = 'Mode Light'
+            // } else {
+            //     mode.textContent = 'Mode Dark'
+            // };
+
+            // render info
+            info.textContent = `dark mode dipakai ${darkCounter}x, jatah dark mode anda ${darkRemainingLeft}x`;
+
+            body.classList.toggle("dark");
+            body.classList.remove('berani');
+        };
+
+        function beraniMode() {
+            if (beraniRemainingLeft == 1) {
+                info.textContent = 'Jatah berani mode anda sudah habis'
+                modeBerani.style.display = "none";
+                home.textContent = 'Refresh'
+                return;
+            }
+
+            beraniCounter += 1;
+            beraniRemainingLeft = beraniLimit - beraniCounter;
+
+            if (beraniCounter == 1 || beraniCounter == 3) {
+                modeBerani.textContent = 'Mode Light'
+            } else {
+                modeBerani.textContent = 'Mode Berani'
+            };
+
+            // render info
+            info.textContent = `berani mode dipakai ${beraniCounter}x, jatah berani mode anda ${beraniRemainingLeft}x`;
+
+            body.classList.toggle("berani");
+            body.classList.remove('dark');
+        }
+
+        function relog() {
+            location.reload();
+        };
+    </script>
+</body>
+
+</html>
